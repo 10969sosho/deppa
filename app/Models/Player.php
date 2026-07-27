@@ -18,7 +18,7 @@ class Player extends Model
 
     protected $attributes = [
         'score' => 0,
-        'duration' => 0,
+        'duration' => 0.0,
         'is_finish' => false,
     ];
 
@@ -27,7 +27,7 @@ class Player extends Model
         return [
             'usia' => 'integer',
             'score' => 'integer',
-            'duration' => 'integer',
+            'duration' => 'float',
             'is_finish' => 'boolean',
         ];
     }

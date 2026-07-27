@@ -21,7 +21,7 @@ class PlayerService
     {
         $player = Player::findOrFail($id);
 
-        $duration = $player->created_at->diffInSeconds(now(), true);
+        $duration = round($player->created_at->diffInMinutes(now(), true), 1);
         $player->update([
             'score' => $data['score'],
             'duration' => $duration,
@@ -97,7 +97,7 @@ class PlayerService
             'total_players' => Player::count(),
             'total_finished' => Player::where('is_finish', true)->count(),
             'avg_score' => round(Player::where('is_finish', true)->avg('score') ?? 0, 1),
-            'avg_duration' => round(Player::where('is_finish', true)->get()->avg(fn($p) => $p->created_at->diffInMinutes($p->updated_at)) ?? 0, 1),
+            'avg_duration' => round(Player::where('is_finish', true)->avg('duration') ?? 0, 1),
         ];
     }
 

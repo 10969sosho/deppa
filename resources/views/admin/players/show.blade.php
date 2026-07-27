@@ -33,7 +33,7 @@
                 @if($player->is_finish)
                     <table class="table table-sm">
                         <tr><td class="text-muted" style="width: 120px;">Score</td><td><strong>{{ number_format($player->score) }}</strong></td></tr>
-                        <tr><td class="text-muted">Durasi</td><td>{{ round($player->created_at->diffInMinutes($player->updated_at), 1) }} menit</td></tr>
+                        <tr><td class="text-muted">Durasi</td><td>{{ $player->duration >= 60 ? round($player->duration / 60, 1) : $player->duration }} menit</td></tr>
                         <tr><td class="text-muted">Status</td><td><span class="badge bg-success">Selesai</span></td></tr>
                     </table>
                 @else

@@ -80,7 +80,7 @@
                                     <td>{{ $p->jenjang }}</td>
                                     <td>{{ $p->gender === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $p->is_finish ? $p->score : '-' }}</td>
-                                    <td>{{ $p->is_finish ? round($p->created_at->diffInMinutes($p->updated_at), 1) . ' mnt' : '-' }}</td>
+                                    <td>{{ $p->is_finish ? ($p->duration >= 60 ? round($p->duration / 60, 1) : $p->duration) . ' mnt' : '-' }}</td>
                                     <td>
                                         @if($p->is_finish)
                                             <span class="badge bg-success">Selesai</span>
