@@ -80,7 +80,7 @@
                                     <td>{{ $p->jenjang }}</td>
                                     <td>{{ $p->gender === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $p->is_finish ? $p->score : '-' }}</td>
-                                    <td>{{ $p->is_finish ? $p->duration . ' dtk' : '-' }}</td>
+                                    <td>{{ $p->is_finish ? $p->created_at->diffInSeconds($p->updated_at) . ' dtk' : '-' }}</td>
                                     <td>
                                         @if($p->is_finish)
                                             <span class="badge bg-success">Selesai</span>

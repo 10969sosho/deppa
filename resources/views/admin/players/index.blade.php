@@ -84,7 +84,7 @@
                             <td>{{ $player->jenjang }}</td>
                             <td>{{ $player->gender === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                             <td>{{ $player->is_finish ? number_format($player->score) : '-' }}</td>
-                            <td>{{ $player->is_finish ? number_format($player->duration) . ' dtk' : '-' }}</td>
+                            <td>{{ $player->is_finish ? $player->created_at->diffInSeconds($player->updated_at) . ' dtk' : '-' }}</td>
                             <td>
                                 @if($player->is_finish)
                                     <span class="badge bg-success">Selesai</span>

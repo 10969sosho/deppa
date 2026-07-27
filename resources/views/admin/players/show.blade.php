@@ -33,7 +33,7 @@
                 @if($player->is_finish)
                     <table class="table table-sm">
                         <tr><td class="text-muted" style="width: 120px;">Score</td><td><strong>{{ number_format($player->score) }}</strong></td></tr>
-                        <tr><td class="text-muted">Durasi</td><td>{{ number_format($player->duration) }} detik</td></tr>
+                        <tr><td class="text-muted">Durasi</td><td>{{ $player->created_at->diffInSeconds($player->updated_at) }} detik</td></tr>
                         <tr><td class="text-muted">Status</td><td><span class="badge bg-success">Selesai</span></td></tr>
                     </table>
                 @else
