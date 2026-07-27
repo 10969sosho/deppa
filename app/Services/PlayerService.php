@@ -21,9 +21,10 @@ class PlayerService
     {
         $player = Player::findOrFail($id);
 
+        $duration = $player->created_at->diffInSeconds(now(), true);
         $player->update([
             'score' => $data['score'],
-            'duration' => $data['duration'],
+            'duration' => $duration,
             'is_finish' => true,
         ]);
 

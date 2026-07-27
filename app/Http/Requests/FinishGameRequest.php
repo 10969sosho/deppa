@@ -15,7 +15,6 @@ class FinishGameRequest extends FormRequest
     {
         return [
             'score' => 'required|integer|min:0',
-            'duration' => 'required|integer|min:0',
         ];
     }
 }

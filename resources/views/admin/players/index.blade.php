@@ -4,6 +4,10 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0"><i class="bi bi-people me-2"></i>Master Player</h4>
+    <div class="d-flex gap-2">
+        <a href="{{ route('admin.export.excel') }}" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel"></i> Excel</a>
+        <a href="{{ route('admin.export.pdf') }}" class="btn btn-danger btn-sm"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+    </div>
 </div>
 
 <div class="card mb-4">
