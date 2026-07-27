@@ -10,9 +10,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+Route::middleware('auth')->group(function () {
     Route::prefix('players')->name('admin.players.')->group(function () {
         Route::get('/', [PlayerController::class, 'index'])->name('index');
         Route::get('/{id}', [PlayerController::class, 'show'])->name('show');
