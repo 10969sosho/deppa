@@ -6,38 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'nama',
         'usia',
         'jenjang',
         'gender',
         'score',
+        'duration',
+        'is_finish',
     ];
 
-    /**
-     * The model's default values for attributes.
-     *
-     * @var array<string, mixed>
-     */
     protected $attributes = [
         'score' => 0,
+        'duration' => 0,
+        'is_finish' => false,
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'usia' => 'integer',
             'score' => 'integer',
+            'duration' => 'integer',
+            'is_finish' => 'boolean',
         ];
     }
 }

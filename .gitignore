@@ -15,7 +15,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-/public/build
 /storage/pail
 .phpactor.json
 auth.json
