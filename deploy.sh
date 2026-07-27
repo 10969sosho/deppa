@@ -56,7 +56,10 @@ cd "$TARGET_DIR"
 /usr/local/bin/php artisan route:cache 2>/dev/null || true
 
 echo ""
-echo "[6/7] Setting permissions..."
+echo "[6/7] Setting up storage and permissions..."
+mkdir -p "$TARGET_DIR/storage/framework/views"
+mkdir -p "$TARGET_DIR/storage/framework/cache/data"
+mkdir -p "$TARGET_DIR/storage/framework/sessions"
 chmod -R 775 "$TARGET_DIR/storage"
 chmod -R 775 "$TARGET_DIR/bootstrap/cache"
 if [ -d "$TARGET_DIR/public/storage" ]; then
