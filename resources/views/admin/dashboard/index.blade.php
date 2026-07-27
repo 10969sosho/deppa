@@ -46,7 +46,7 @@
                 <div class="card border-start border-info border-4">
                     <div class="card-body py-3">
                         <p class="text-muted mb-0 small">Rata-rata Durasi</p>
-                        <h3 class="mb-0">{{ number_format($stats['avg_duration']) }} dtk</h3>
+                                <h3 class="mb-0">{{ number_format($stats['avg_duration']) }} mnt</h3>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                                     <td>{{ $p->jenjang }}</td>
                                     <td>{{ $p->gender === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $p->is_finish ? $p->score : '-' }}</td>
-                                    <td>{{ $p->is_finish ? $p->created_at->diffInSeconds($p->updated_at) . ' dtk' : '-' }}</td>
+                                    <td>{{ $p->is_finish ? round($p->created_at->diffInMinutes($p->updated_at), 1) . ' mnt' : '-' }}</td>
                                     <td>
                                         @if($p->is_finish)
                                             <span class="badge bg-success">Selesai</span>
