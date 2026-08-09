@@ -110,7 +110,7 @@
     </div>
     @if($players->hasPages())
         <div class="card-footer">
-            {{ $players->appends(request()->query())->links() }}
+            {{ $players->appends(request()->query())->links('pagination::bootstrap-5') }}
         </div>
     @endif
 </div>
