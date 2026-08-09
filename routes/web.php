@@ -3,29 +3,21 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\PlayerController;
-use App\Http\Controllers\ProfileController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => redirect()->route('admin.dashboard'));
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::prefix('players')->name('admin.players.')->group(function () {
-        Route::get('/', [PlayerController::class, 'index'])->name('index');
-        Route::get('/{id}', [PlayerController::class, 'show'])->name('show');
-    });
-
-    Route::prefix('export')->name('admin.export.')->group(function () {
-        Route::get('/excel', [ExportController::class, 'excel'])->name('excel');
-        Route::get('/pdf', [ExportController::class, 'pdf'])->name('pdf');
-    });
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::prefix('players')->name('admin.players.')->group(function () {
+    Route::get('/', [PlayerController::class, 'index'])->name('index');
+    Route::get('/{id}', [PlayerController::class, 'show'])->name('show');
 });
 
-require __DIR__ . '/auth.php';
+Route::prefix('export')->name('admin.export.')->group(function () {
+    Route::get('/excel', [ExportController::class, 'excel'])->name('excel');
+    Route::get('/pdf', [ExportController::class, 'pdf'])->name('pdf');
+});
+
+Route::get('{any}', fn (): RedirectResponse => redirect()->route('admin.dashboard'))->where('any', '.*');
