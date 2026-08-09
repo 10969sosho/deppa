@@ -5,7 +5,7 @@ set -e
 REPO_DIR="/home/alurelab/repositories/deppa"
 TARGET_DIR="/home/alurelab/games.alureflow.com"
 BRANCH="main"
-COMPOSER="/home/alurelab/composer.phar"
+COMPOSER="/home/alurelab/.local/bin/composer"
 
 echo "========================================"
 echo "  Deploying DEPPA — Si Doel Smart Finance"
