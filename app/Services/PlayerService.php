@@ -10,6 +10,7 @@ class PlayerService
     public function register(array $data): Player
     {
         return Player::create([
+            'user_id' => $data['user_id'] ?? null,
             'nama' => $data['nama'],
             'usia' => $data['usia'],
             'jenjang' => $data['jenjang'],
