@@ -6,9 +6,9 @@ use App\Http\Controllers\Admin\PlayerController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('admin.dashboard'));
+Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::redirect('/dashboard', '/');
 
 Route::prefix('players')->name('admin.players.')->group(function () {
     Route::get('/', [PlayerController::class, 'index'])->name('index');
