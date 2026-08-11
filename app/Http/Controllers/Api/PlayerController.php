@@ -7,6 +7,7 @@ use App\Http\Requests\FinishGameRequest;
 use App\Http\Requests\StorePlayerRequest;
 use App\Models\Player;
 use App\Services\PlayerService;
+use App\Support\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,7 +60,8 @@ class PlayerController extends Controller
             abort(404);
         }
 
-        $pdf = Pdf::loadView('api.exports.certificate', compact('player'))
+        $logo = Logo::dataUri();
+        $pdf = Pdf::loadView('api.exports.certificate', compact('player', 'logo'))
             ->setPaper('a4', 'landscape');
 
         return $pdf->download("sertifikat-{$player->id}.pdf");

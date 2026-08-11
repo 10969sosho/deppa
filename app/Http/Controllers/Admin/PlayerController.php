@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Services\PlayerService;
+use App\Support\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -52,7 +53,8 @@ class PlayerController extends Controller
             abort(404, 'Player belum menyelesaikan game.');
         }
 
-        $pdf = Pdf::loadView('api.exports.certificate', compact('player'))
+        $logo = Logo::dataUri();
+        $pdf = Pdf::loadView('api.exports.certificate', compact('player', 'logo'))
             ->setPaper('a4', 'landscape');
 
         return $pdf->stream("sertifikat-{$player->id}.pdf");

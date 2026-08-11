@@ -29,7 +29,7 @@
             border-radius: 8px;
             pointer-events: none;
         }
-        .logo { font-size: 28px; color: #0d6efd; margin-bottom: 8px; }
+        .logo { margin-bottom: 10px; }
         .title { font-size: 36px; font-weight: bold; color: #0d6efd; margin: 5px 0 0; text-transform: uppercase; letter-spacing: 3px; }
         .subtitle { font-size: 16px; color: #666; margin: 5px 0 30px; }
         .recipient { font-size: 32px; font-weight: bold; color: #212529; margin: 15px 0; }
@@ -43,7 +43,9 @@
 </head>
 <body>
     <div class="cert">
-        <div class="logo">&#127918;</div>
+        <div class="logo">
+            <img src="{{ $logo }}" alt="Logo" style="width: 90px; height: 90px;">
+        </div>
         <div class="title">Sertifikat</div>
         <div class="subtitle">Si Doel Smart Finance</div>
 
