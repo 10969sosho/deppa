@@ -12,18 +12,20 @@
         }
         .cert {
             width: 285mm;
-            min-height: 198mm;
+            height: 196mm;
             border: 6px solid #0d6efd;
             border-radius: 12px;
             text-align: center;
-            padding: 12mm 10mm 8mm;
-            margin: 6mm auto;
+            padding: 10mm 10mm 6mm;
+            margin: 7mm auto;
+            box-sizing: border-box;
             page-break-inside: avoid;
         }
         .cert-inner {
             border: 2px solid #e0e7ff;
             border-radius: 8px;
-            padding: 6mm 8mm 4mm;
+            padding: 4mm 8mm 3mm;
+            box-sizing: border-box;
             page-break-inside: avoid;
         }
         .logo img { width: 22mm; height: 22mm; }
