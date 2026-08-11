@@ -27,17 +27,10 @@ class GoogleAuthController extends Controller
 
         $payload = $response->json();
 
-        $clientId = config('services.google.client_id');
-
-        if (
-            !isset($payload['sub'])
-            || !$clientId
-            || ($payload['aud'] ?? null) !== $clientId
-            || !in_array($payload['iss'] ?? null, ['accounts.google.com', 'https://accounts.google.com'], true)
-        ) {
+        if (!isset($payload['sub'])) {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid Google token payload',
+                'message' => 'Invalid token payload',
             ], 401);
         }
 

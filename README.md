@@ -21,25 +21,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Construct 3 API
-
-Construct 3 is the game client. Laravel provides the API, Google identity verification,
-game-result storage, PDF reports, and certificates.
-
-Set `GOOGLE_CLIENT_ID` in the local or production `.env` from the Google OAuth web client
-configuration. Keep the downloaded `client_secret_*.json` file out of Git. The current
-Construct 3 flow uses a Google `id_token`, so the client secret is not sent to the game.
-
-Endpoints:
-
-- `POST /api/auth/google` — verify a Google `id_token` and return a Sanctum bearer token.
-- `POST /api/player` — create a game session using the bearer token.
-- `PUT /api/player/{id}/finish` — save the final score and duration.
-- `GET /api/player/{id}/report` — download the result report PDF.
-- `GET /api/player/{id}/certificate` — download the certificate after completion.
-
-Use `Authorization: Bearer <token>` for all endpoints except Google authentication.
-
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
