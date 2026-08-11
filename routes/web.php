@@ -27,4 +27,7 @@ Route::prefix('export')->name('admin.export.')->group(function () {
     Route::get('/pdf', [ExportController::class, 'pdf'])->name('pdf');
 });
 
+Route::get('/test/report/{id}', [PlayerController::class, 'testReport'])->name('admin.players.test-report');
+Route::get('/test/certificate/{id}', [PlayerController::class, 'testCertificate'])->name('admin.players.test-certificate');
+
 Route::get('{any}', fn (): RedirectResponse => redirect()->route('admin.dashboard'))->where('any', '.*');
