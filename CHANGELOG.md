@@ -7,5 +7,6 @@
 - Changed finish, report, and certificate API identifiers from numeric ID to player name.
 - Added a public JSON resume endpoint at `GET /api/player/name/{name}`.
 - Allowed CORS requests from the Construct preview origin for API routes.
+- Added automatic numbered suffixes for duplicate legacy player names before applying the unique index.
 - Removed Google routes, controllers, request validation, configuration, and legacy database columns through migration.
 - Added feature coverage for registration, login, name-based game completion, downloads, and removed Google auth.
