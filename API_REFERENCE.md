@@ -43,7 +43,7 @@ Cross-origin requests from `https://preview.construct.net` are allowed for API r
 
 ## Game Endpoints
 
-Use `Authorization: Bearer <token>` for these routes. `{name}` is the URL-encoded registered player name.
+Use `Authorization: Bearer <token>` for the finish route. Report and certificate downloads are public so their URLs can be opened directly in a browser. `{name}` is the URL-encoded registered player name.
 
 - `PUT /player/{name}/finish` with `{ "score": 95 }`
 - `GET /player/{name}/report` downloads the report PDF after finish

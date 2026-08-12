@@ -97,13 +97,11 @@ class NameAuthenticationTest extends TestCase
             ->putJson('/api/player/Dewi%20Lestari/finish', ['score' => 95])
             ->assertOk();
 
-        $this->withToken($token)
-            ->get('/api/player/Dewi%20Lestari/report')
+        $this->get('/api/player/Dewi%20Lestari/report')
             ->assertOk()
             ->assertHeader('content-disposition', 'attachment; filename=laporan-game-dewi-lestari.pdf');
 
-        $this->withToken($token)
-            ->get('/api/player/Dewi%20Lestari/certificate')
+        $this->get('/api/player/Dewi%20Lestari/certificate')
             ->assertOk()
             ->assertHeader('content-disposition', 'attachment; filename=sertifikat-dewi-lestari.pdf');
     }

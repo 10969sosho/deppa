@@ -91,9 +91,9 @@ class PlayerController extends Controller
         ]);
     }
 
-    public function report(string $name, Request $request): Response
+    public function report(string $name): Response
     {
-        $player = $this->ownedPlayer($name, $request);
+        $player = $this->findPlayerByName($name);
 
         if (! $player->is_finish) {
             abort(404);
@@ -104,9 +104,9 @@ class PlayerController extends Controller
         return $pdf->download('laporan-game-'.Str::slug($player->nama).'.pdf');
     }
 
-    public function certificate(string $name, Request $request): Response
+    public function certificate(string $name): Response
     {
-        $player = $this->ownedPlayer($name, $request);
+        $player = $this->findPlayerByName($name);
 
         if (! $player->is_finish) {
             abort(404);
@@ -124,5 +124,10 @@ class PlayerController extends Controller
         return Player::where('user_id', $request->user()->id)
             ->whereRaw('LOWER(nama) = LOWER(?)', [$name])
             ->firstOrFail();
+    }
+
+    private function findPlayerByName(string $name): Player
+    {
+        return Player::whereRaw('LOWER(nama) = LOWER(?)', [$name])->firstOrFail();
     }
 }
