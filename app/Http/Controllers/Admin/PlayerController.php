@@ -8,6 +8,7 @@ use App\Services\PlayerService;
 use App\Support\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class PlayerController extends Controller
@@ -42,14 +43,14 @@ class PlayerController extends Controller
 
         $pdf = Pdf::loadView('api.exports.report', compact('player'));
 
-        return $pdf->stream("laporan-game-{$player->id}.pdf");
+        return $pdf->stream('laporan-game-'.Str::slug($player->nama).'.pdf');
     }
 
     public function testCertificate(int $id)
     {
         $player = Player::findOrFail($id);
 
-        if (!$player->is_finish) {
+        if (! $player->is_finish) {
             abort(404, 'Player belum menyelesaikan game.');
         }
 
@@ -57,6 +58,6 @@ class PlayerController extends Controller
         $pdf = Pdf::loadView('api.exports.certificate', compact('player', 'logo'))
             ->setPaper('a4', 'landscape');
 
-        return $pdf->stream("sertifikat-{$player->id}.pdf");
+        return $pdf->stream('sertifikat-'.Str::slug($player->nama).'.pdf');
     }
 }

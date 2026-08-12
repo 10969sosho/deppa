@@ -15,11 +15,6 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'email',
-        'password',
-        'google_id',
-        'google_email',
-        'google_avatar',
     ];
 
     protected $hidden = [

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <title>Laporan Game #{{ $player->id }}</title>
+    <title>Laporan Game - {{ $player->nama }}</title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 13px; color: #333; padding: 30px; }
         .header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #0d6efd; padding-bottom: 15px; }
@@ -24,7 +24,7 @@
 <body>
     <div class="header">
         <h1>Laporan Hasil Game</h1>
-        <p>Si Doel Smart Finance — ID: #{{ $player->id }}</p>
+        <p>Si Doel Smart Finance — {{ $player->nama }}</p>
     </div>
 
     <div class="info">

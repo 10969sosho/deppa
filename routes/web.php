@@ -3,19 +3,12 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\PlayerController;
-use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::redirect('/dashboard', '/');
-
-Route::prefix('auth/google')->name('auth.google.')->group(function () {
-    Route::get('/', [GoogleController::class, 'redirect'])->name('redirect');
-    Route::get('/callback', [GoogleController::class, 'callback'])->name('callback');
-    Route::get('/success', [GoogleController::class, 'success'])->name('success');
-});
 
 Route::prefix('players')->name('admin.players.')->group(function () {
     Route::get('/', [PlayerController::class, 'index'])->name('index');

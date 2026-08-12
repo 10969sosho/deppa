@@ -21,6 +21,17 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## DEPPA API
+
+The game API uses name-based player authentication. Google authentication is not available.
+
+- Register player data with `POST /api/auth/register` or `POST /api/player`.
+- Log in with `POST /api/auth/login` using `nama` (the `name` alias is also accepted).
+- Send the returned bearer token to finish or download a player's report and certificate.
+- Player routes use the unique player name instead of the numeric player ID.
+
+See [API_REFERENCE.md](API_REFERENCE.md), [BUSINESS_RULES.md](BUSINESS_RULES.md), and [ARCHITECTURE.md](ARCHITECTURE.md) for the application contract.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.

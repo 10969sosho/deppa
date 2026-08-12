@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\Player;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -28,9 +28,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'nama' => ['required', 'string', 'max:100'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if (! $this->filled('nama') && $this->filled('name')) {
+            $this->merge(['nama' => $this->input('name')]);
+        }
+
+        $this->merge(['nama' => trim((string) $this->input('nama'))]);
     }
 
     /**
@@ -38,19 +46,25 @@ class LoginRequest extends FormRequest
      *
      * @throws ValidationException
      */
-    public function authenticate(): void
+    public function authenticate(): Player
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $player = Player::with('user')
+            ->whereRaw('LOWER(nama) = LOWER(?)', [(string) $this->input('nama')])
+            ->first();
+
+        if (! $player || ! $player->user) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'nama' => 'Nama tidak ditemukan.',
             ]);
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        return $player;
     }
 
     /**
@@ -69,7 +83,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'nama' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -81,6 +95,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('nama')).'|'.$this->ip());
     }
 }
