@@ -54,6 +54,32 @@ class PlayerController extends Controller
         ], 201);
     }
 
+    public function findByName(string $name): JsonResponse
+    {
+        $player = Player::whereRaw('LOWER(nama) = LOWER(?)', [$name])->first();
+
+        if (! $player) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Player tidak ditemukan',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'id' => $player->id,
+                'nama' => $player->nama,
+                'usia' => $player->usia,
+                'jenjang' => $player->jenjang,
+                'gender' => $player->gender,
+                'score' => $player->score,
+                'duration' => $player->duration,
+                'is_finish' => $player->is_finish,
+            ],
+        ]);
+    }
+
     public function finish(string $name, FinishGameRequest $request): JsonResponse
     {
         $player = $this->ownedPlayer($name, $request);

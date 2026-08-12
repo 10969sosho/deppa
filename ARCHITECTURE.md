@@ -17,3 +17,5 @@
 3. Finish, report, and certificate requests require `auth:sanctum` and resolve the name against the authenticated user's player.
 
 Google controllers, routes, configuration, and credentials are removed. The cleanup migration removes legacy Google columns and adds the unique player-name index.
+
+API CORS is configured in `config/cors.php` for the Construct preview and production game origins.

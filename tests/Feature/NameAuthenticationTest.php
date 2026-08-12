@@ -52,6 +52,36 @@ class NameAuthenticationTest extends TestCase
         $this->assertNotEmpty($registration->json('data.token'));
     }
 
+    public function test_player_can_be_resumed_by_a_name_with_spaces_and_a_period(): void
+    {
+        $this->postJson('/api/player', [
+            'nama' => 'M. Alfath',
+            'usia' => 12,
+            'jenjang' => 'SD',
+            'gender' => 'L',
+        ])->assertCreated();
+
+        $this->withHeader('Origin', 'https://preview.construct.net')
+            ->getJson('/api/player/name/'.rawurlencode('M. Alfath'))
+            ->assertOk()
+            ->assertJsonPath('success', true)
+            ->assertJsonPath('data.nama', 'M. Alfath')
+            ->assertJsonPath('data.usia', 12)
+            ->assertJsonPath('data.jenjang', 'SD')
+            ->assertJsonPath('data.gender', 'L')
+            ->assertHeader('Access-Control-Allow-Origin', 'https://preview.construct.net');
+    }
+
+    public function test_missing_resume_player_returns_json_not_a_redirect(): void
+    {
+        $this->getJson('/api/player/name/'.rawurlencode('Unknown Player'))
+            ->assertNotFound()
+            ->assertJson([
+                'success' => false,
+                'message' => 'Player tidak ditemukan',
+            ]);
+    }
+
     public function test_finish_and_downloads_use_the_player_name(): void
     {
         $registration = $this->postJson('/api/auth/register', [
