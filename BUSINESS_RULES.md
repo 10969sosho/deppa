@@ -8,3 +8,4 @@
 - Finish access is restricted to the authenticated player's own name; report and certificate downloads are public by unique name for direct browser downloads.
 - A report and certificate can only be downloaded after `is_finish` is true.
 - Certificate and report filenames use a slug derived from the player name.
+- An admin can delete a player from the dashboard; deletion also removes the linked user account and its Sanctum tokens in a single transaction.

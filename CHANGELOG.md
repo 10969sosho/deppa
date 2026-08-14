@@ -3,6 +3,7 @@
 ## 2026-08-14
 
 - Allowed CORS requests from `https://localhost` for API routes so the Construct preview APK can call the API without being blocked.
+- Added a delete button in the admin dashboard and Master Player table so an admin can manually delete a player record together with its linked user account and tokens.
 
 ## 2026-08-12
 

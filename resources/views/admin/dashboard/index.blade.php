@@ -63,6 +63,7 @@
                         <th>Durasi</th>
                         <th>Status</th>
                         <th>Tanggal</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,9 +83,18 @@
                                 @endif
                             </td>
                             <td class="small">{{ $p->created_at->format('d/m/Y H:i') }}</td>
+                            <td>
+                                <form method="POST" action="{{ route('admin.players.destroy', $p->id) }}" onsubmit="return confirm('Hapus data player \"{{ addslashes($p->nama) }}\"?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
-                        <tr><td colspan="8" class="text-center py-4 text-muted">Belum ada data</td></tr>
+                        <tr><td colspan="9" class="text-center py-4 text-muted">Belum ada data</td></tr>
                     @endforelse
                 </tbody>
             </table>

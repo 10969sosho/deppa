@@ -8,7 +8,7 @@
 - `app/Models/Player.php` stores personal data and game results.
 - `app/Models/User.php` is the Sanctum token owner for a player.
 - `resources/views/api/exports/` contains the report and certificate PDF templates.
-- `routes/api.php` exposes the client API; `routes/web.php` exposes the admin dashboard.
+- `routes/api.php` exposes the client API; `routes/web.php` exposes the admin dashboard, including the `DELETE /players/{id}` route for manually deleting a player.
 
 ## Authentication Flow
 
