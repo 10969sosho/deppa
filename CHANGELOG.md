@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-14
+
+- Allowed CORS requests from `https://localhost` for API routes so the Construct preview APK can call the API without being blocked.
+
 ## 2026-08-12
 
 - Replaced Google OAuth with name-based registration and login.

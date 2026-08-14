@@ -4,6 +4,7 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
     'allowed_origins' => [
+        'https://localhost',
         'https://preview.construct.net',
         'https://games.alureflow.com',
     ],

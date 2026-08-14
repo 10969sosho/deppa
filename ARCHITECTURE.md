@@ -18,4 +18,4 @@
 
 Google controllers, routes, configuration, and credentials are removed. The cleanup migration removes legacy Google columns and adds the unique player-name index.
 
-API CORS is configured in `config/cors.php` for the Construct preview and production game origins.
+API CORS is configured in `config/cors.php` for the local preview, Construct preview, and production game origins.

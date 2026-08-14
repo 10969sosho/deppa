@@ -39,7 +39,7 @@ The `name` request key is accepted as an alias. The response contains a Sanctum 
 
 This public endpoint is used by the game main menu before the player has a token. `{name}` must be URL-encoded. It returns JSON with `id`, `nama`, `usia`, `jenjang`, `gender`, `score`, `duration`, and `is_finish`.
 
-Cross-origin requests from `https://preview.construct.net` are allowed for API routes.
+Cross-origin requests from `https://preview.construct.net` and `https://localhost` are allowed for API routes.
 
 ## Game Endpoints
 
