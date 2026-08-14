@@ -8,6 +8,7 @@ use App\Services\PlayerService;
 use App\Support\Logo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -35,6 +36,15 @@ class PlayerController extends Controller
         $player = $this->playerService->findById($id);
 
         return view('admin.players.show', compact('player'));
+    }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $this->playerService->deletePlayer($id);
+
+        return redirect()
+            ->route('admin.players.index')
+            ->with('success', 'Data player berhasil dihapus.');
     }
 
     public function testReport(int $id)

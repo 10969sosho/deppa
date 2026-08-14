@@ -94,9 +94,18 @@
                             </td>
                             <td class="small">{{ $player->created_at->format('d/m/Y H:i') }}</td>
                             <td>
-                                <a href="{{ route('admin.players.show', $player) }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('admin.players.show', $player) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <form method="POST" action="{{ route('admin.players.destroy', $player->id) }}" onsubmit="return confirm('Hapus data player \"{{ addslashes($player->nama) }}\"?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

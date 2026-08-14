@@ -13,6 +13,7 @@ Route::redirect('/dashboard', '/');
 Route::prefix('players')->name('admin.players.')->group(function () {
     Route::get('/', [PlayerController::class, 'index'])->name('index');
     Route::get('/{id}', [PlayerController::class, 'show'])->name('show');
+    Route::delete('/{id}', [PlayerController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('export')->name('admin.export.')->group(function () {

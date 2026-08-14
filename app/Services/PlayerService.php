@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Player;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class PlayerService
 {
@@ -81,6 +82,20 @@ class PlayerService
     public function findById(int $id): Player
     {
         return Player::findOrFail($id);
+    }
+
+    public function deletePlayer(int $id): void
+    {
+        $player = Player::findOrFail($id);
+
+        DB::transaction(function () use ($player) {
+            if ($player->user) {
+                $player->user->tokens()->delete();
+                $player->user->delete();
+            }
+
+            $player->delete();
+        });
     }
 
     public function getJenjangList(): array
