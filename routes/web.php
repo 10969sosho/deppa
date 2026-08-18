@@ -18,7 +18,9 @@ $serveGameAsset = function (string $path) {
         404
     );
 
-    return response()->file($file);
+    return response()->file($file, [
+        'Cache-Control' => 'public, max-age=3600',
+    ]);
 };
 
 Route::get('/', function () {

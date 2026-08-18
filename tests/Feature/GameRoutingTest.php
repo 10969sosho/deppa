@@ -20,7 +20,7 @@ class GameRoutingTest extends TestCase
 
     public function test_game_assets_are_served_without_exposing_files_outside_games(): void
     {
-        $this->get('/games/style.css')->assertOk();
+        $this->get('/games/style.css')->assertOk()->assertHeader('Cache-Control', 'max-age=3600, public');
         $this->get('/data.json')->assertOk()->assertHeader('Content-Type', 'application/json');
         $this->get('/scripts/c3main.js')->assertOk();
         $this->get('/games/../.env')->assertNotFound();

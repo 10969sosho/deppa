@@ -24,3 +24,4 @@ API CORS is configured in `config/cors.php` for the local preview, Construct pre
 
 - The game export is kept in `games/` and is served through Laravel because the production document root is `public/`.
 - `games/scripts/navigation-guard.js` traps browser back navigation and requests the browser's native leave confirmation for refresh, close, or navigation away. Browser security prevents JavaScript from silently blocking every refresh or force-closing action.
+- Game assets are served with a one-hour public cache header and the entry page preloads the first runtime files to reduce repeated loading time on slower devices.
