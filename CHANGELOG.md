@@ -5,6 +5,7 @@
 - Served the Construct game export at `/` and moved the admin dashboard to `/dashboard`.
 - Added safe `/games/*` asset serving and browser navigation protection for the game session.
 - Added whitelisted root-relative asset aliases so Construct loaders cannot receive the dashboard HTML while starting the game.
+- Preserved the `/games/` base path when updating the Construct export so root-domain loading resolves assets and the Service Worker correctly.
 
 ## 2026-08-14
 
