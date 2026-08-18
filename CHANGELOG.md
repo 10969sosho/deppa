@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-18
+
+- Served the Construct game export at `/` and moved the admin dashboard to `/dashboard`.
+- Added safe `/games/*` asset serving and browser navigation protection for the game session.
+
 ## 2026-08-14
 
 - Allowed CORS requests from `https://localhost` for API routes so the Construct preview APK can call the API without being blocked.

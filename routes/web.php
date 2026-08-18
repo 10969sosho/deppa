@@ -6,9 +6,26 @@ use App\Http\Controllers\Admin\PlayerController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/', function () {
+    return response()->file(base_path('games/index.html'));
+})->name('game');
 
-Route::redirect('/dashboard', '/');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+Route::get('/games/{path}', function (string $path) {
+    $gamesDirectory = realpath(base_path('games'));
+    $file = realpath(base_path('games/'.$path));
+
+    abort_if(
+        $gamesDirectory === false
+            || $file === false
+            || ! str_starts_with($file, $gamesDirectory.DIRECTORY_SEPARATOR)
+            || ! is_file($file),
+        404
+    );
+
+    return response()->file($file);
+})->where('path', '.*')->name('game.asset');
 
 Route::prefix('players')->name('admin.players.')->group(function () {
     Route::get('/', [PlayerController::class, 'index'])->name('index');

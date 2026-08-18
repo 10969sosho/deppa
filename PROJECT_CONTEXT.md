@@ -2,6 +2,8 @@
 
 DEPPA is a Laravel API and administration dashboard for the Si Doel Smart Finance game. Players register their personal data, complete the game, and download a report and certificate after finishing.
 
+The production game is available at `https://games.alureflow.com/`; the administration dashboard is available at `https://games.alureflow.com/dashboard`.
+
 ## Current Authentication
 
 - Authentication is name-based; no password or Google OAuth is used.
