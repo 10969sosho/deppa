@@ -11,6 +11,4 @@ Route::get('/player/name/{name}', [PlayerController::class, 'findByName'])->name
 Route::get('/player/{name}/report', [PlayerController::class, 'report'])->name('api.player.report');
 Route::get('/player/{name}/certificate', [PlayerController::class, 'certificate'])->name('api.player.certificate');
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::put('/player/{name}/finish', [PlayerController::class, 'finish'])->name('api.player.finish');
-});
+Route::put('/player/{name}/finish', [PlayerController::class, 'finish'])->name('api.player.finish');

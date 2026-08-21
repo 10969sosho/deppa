@@ -82,7 +82,7 @@ class PlayerController extends Controller
 
     public function finish(string $name, FinishGameRequest $request): JsonResponse
     {
-        $player = $this->ownedPlayer($name, $request);
+        $player = $this->findPlayerByName($name);
 
         $this->playerService->finishGame($player->id, $request->validated());
 
