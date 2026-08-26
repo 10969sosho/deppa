@@ -101,7 +101,7 @@ class PlayerController extends Controller
 
         $pdf = Pdf::loadView('api.exports.report', compact('player'));
 
-        return $pdf->download('laporan-game-'.Str::slug($player->nama).'.pdf');
+        return $pdf->stream('laporan-game-'.Str::slug($player->nama).'.pdf');
     }
 
     public function certificate(string $name): Response
@@ -116,7 +116,7 @@ class PlayerController extends Controller
         $pdf = Pdf::loadView('api.exports.certificate', compact('player', 'logo'))
             ->setPaper('a4', 'landscape');
 
-        return $pdf->download('sertifikat-'.Str::slug($player->nama).'.pdf');
+        return $pdf->stream('sertifikat-'.Str::slug($player->nama).'.pdf');
     }
 
     private function ownedPlayer(string $name, Request $request): Player
