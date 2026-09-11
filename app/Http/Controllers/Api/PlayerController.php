@@ -96,12 +96,18 @@ class PlayerController extends Controller
         $player = $this->findPlayerByName($name);
 
         if (! $player->is_finish) {
-            abort(404);
+            // Race condition guard: if player has score, auto-mark as finished
+            if ($player->score > 0) {
+                $this->playerService->finishGame($player->id, ['score' => $player->score]);
+                $player->refresh();
+            } else {
+                abort(404);
+            }
         }
 
         $pdf = Pdf::loadView('api.exports.report', compact('player'));
 
-        return $pdf->stream('laporan-game-'.Str::slug($player->nama).'.pdf');
+        return $pdf->download('laporan-game-'.Str::slug($player->nama).'.pdf');
     }
 
     public function certificate(string $name): Response
@@ -109,14 +115,20 @@ class PlayerController extends Controller
         $player = $this->findPlayerByName($name);
 
         if (! $player->is_finish) {
-            abort(404);
+            // Race condition guard: if player has score, auto-mark as finished
+            if ($player->score > 0) {
+                $this->playerService->finishGame($player->id, ['score' => $player->score]);
+                $player->refresh();
+            } else {
+                abort(404);
+            }
         }
 
         $logo = Logo::dataUri();
         $pdf = Pdf::loadView('api.exports.certificate', compact('player', 'logo'))
             ->setPaper('a4', 'landscape');
 
-        return $pdf->stream('sertifikat-'.Str::slug($player->nama).'.pdf');
+        return $pdf->download('sertifikat-'.Str::slug($player->nama).'.pdf');
     }
 
     private function ownedPlayer(string $name, Request $request): Player

@@ -53,6 +53,40 @@ Route::prefix('export')->name('admin.export.')->group(function () {
     Route::get('/pdf', [ExportController::class, 'pdf'])->name('pdf');
 });
 
+Route::get('/certificate/{name}', function (string $name) {
+    $player = \App\Models\Player::whereRaw('LOWER(nama) = LOWER(?)', [$name])->first();
+
+    if (! $player) {
+        abort(404);
+    }
+
+    if (! $player->is_finish) {
+        abort(404);
+    }
+
+    return view('api.certificate-page', [
+        'player' => $player,
+        'name' => $name,
+    ]);
+})->name('certificate.page');
+
+Route::get('/report/{name}', function (string $name) {
+    $player = \App\Models\Player::whereRaw('LOWER(nama) = LOWER(?)', [$name])->first();
+
+    if (! $player) {
+        abort(404);
+    }
+
+    if (! $player->is_finish) {
+        abort(404);
+    }
+
+    return view('api.report-page', [
+        'player' => $player,
+        'name' => $name,
+    ]);
+})->name('report.page');
+
 Route::get('/test/report/{id}', [PlayerController::class, 'testReport'])->name('admin.players.test-report');
 Route::get('/test/certificate/{id}', [PlayerController::class, 'testCertificate'])->name('admin.players.test-certificate');
 
